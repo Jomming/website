@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin: 0;
+        }
+        .cart {
+            font-size: 1.1em;
+        }
+        .product {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            transition: box-shadow 0.2s;
+        }
+        .product:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+        .product button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .product button:hover {
+            background: #218838;
+        }
+        .show-products-button {
+            padding: 10px 20px;
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+        .show-products-button:hover {
+            background: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lists of the product</h1>
+        <div class="cart">
+            <span id="cart-count">0</span> items in cart
+        </div>
+    </header>
+    <button class="show-products-button" onclick="displayProducts()">Show Products</button>
+    <main id="product-list"></main>
+
+    <script>
+        const products = [
+            {
+                name: "Product 1",
+                price: 19.99,
+                image: "https://via.placeholder.com/150",
+                description: "This is a brief description of Product 1."
+            },
+            {
+                name: "Product 2",
+                price: 29.99,
+                image: "https://via.placeholder.com/150",
+                description: "This is a brief description of Product 2."
+            },
+            {
+                name: "Product 3",
+                price: 39.99,
+                image: "https://via.placeholder.com/150",
+                description: "This is a brief description of Product 3."
+            }
+        ];
+
+        let cartCount = 0;
+
+        function displayProducts() {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = ''; // Clear previous products
+
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `
+                    <img src="${product.image}" alt="${product.name} image">
+                    <h2>${product.name}</h2>
+                    <p>${product.description}</p>
+                    <p>Price: $${product.price.toFixed(2)}</p>
+                    <button onclick="addToCart()">Add to Cart</button>
+                `;
+                productList.appendChild(productDiv);
+            });
+        }
+
+        function addToCart() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+        }
+    </script>
+</body>
+</html>
